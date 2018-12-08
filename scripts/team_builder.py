@@ -28,6 +28,8 @@ if __name__=='__main__':
     squad_name = ['3-5-2', '4-4-2', '4-3-3', '3-4-3', '5-3-2']
 
     epl_clubs=['Manchester City', 'Liverpool', 'Tottenham Hotspur', 'Chelsea', 'Arsenal', 'Everton','Bournemouth', 'Manchester United', 'Leicester City','Brighton & Hove Albion', 'Watford', 'Wolverhampton Wanderers', 'West Ham United', 'Newcastle United', 'Crystal Palace','Cardiff City', 'Huddersfield Town', 'Southampton', 'Burnley', 'Fulham']
+    for i in range(0,len(epl_clubs)):
+        epl_clubs[i]=epl_clubs[i].lower()
     player_data = pd.read_csv('data/fifa_dataset_processed.tsv',sep='\t')
 
     # dict of clubs, each key is a club name and the value is a club object
@@ -37,6 +39,7 @@ if __name__=='__main__':
 
 
     df = generate_team_stats(clubs_dict,squad_list_adj,squad_name,midfield,defense,attack)
+    prior['home_score']= prior.home_score.astype('float32')
     df1 = generate_prior_data(df,epl_clubs,prior)
     df=df.reset_index()
     df1=df1.reset_index()

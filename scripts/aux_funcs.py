@@ -23,8 +23,8 @@ def generate_prior_data(stats,epl_clubs,prior):
                 xA = np.mean(map(float, prior[(prior['home_team'] == clubA) & (prior['away_team'] == clubB)]['home_score'].to_string(index = False).split('\n')) + map(float, prior[(prior['home_team'] == clubB) & (prior['away_team'] == clubA)]['away_score'].to_string(index = False).split('\n'))).round(2)
                 xB = np.mean(map(float, prior[(prior['home_team'] == clubB) & (prior['away_team'] == clubA)]['home_score'].to_string(index = False).split('\n')) + map(float, prior[(prior['home_team'] == clubA) & (prior['away_team'] == clubB)]['away_score'].to_string(index = False).split('\n'))).round(2)
             except:
-                xA = int(stats[stats.index == clubB]['Tier'].get_values())
-                xB = int(stats[stats.index == clubA]['Tier'].get_values())
+                xA = float(stats[stats.index == clubB]['Tier'].get_values())
+                xB = float(stats[stats.index == clubA]['Tier'].get_values())
             d.append({'ClubA': clubA, 'ClubB': clubB, 'meanScoreA': xA, 'meanScoreB': xB})
     processed_data = pd.DataFrame(d).reindex_axis(['ClubA', 'meanScoreA', 'ClubB', 'meanScoreB'], axis = 1).set_index(['ClubA', 'ClubB'])
     processed_data.to_csv('data/epl_prior.tsv',sep='\t')
