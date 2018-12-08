@@ -10,21 +10,44 @@ def generate_team_stats(clubs_dict, squad_list,squad_name,midfield,defense,attac
         else: tier = 3
         d.append({'Club': key, 'Rating': best_rating, 'Squad': best_squad, 'Defence': def_rating, 'Midfield': mid_rating, 'Attack': att_rating, 'Formation': best_formation,'Tier': tier})
     processed_data = pd.DataFrame(d).reindex_axis(['Club', 'Squad', 'Formation', 'Tier', 'Rating', 'Attack', 'Midfield', 'Defence'], axis = 1).set_index('Club')
+    #processed_data = processed_data.reset_index()
     processed_data.to_csv('data/epl_processed.csv')
     return processed_data
 
-def generate_prior_data(stats,epl_clubs):
+def generate_prior_data(stats,epl_clubs,prior):
     d = []
-    for cA in qualified_countries:
-        for countryB in qualified_countries:
-            if countryA == countryB: continue
+    for clubA in epl_clubs:
+        for clubB in epl_clubs:
+            if clubA == clubB: continue
             try:
-                xA = np.mean(map(float, prior[(prior['home_team'] == countryA) & (prior['away_team'] == countryB)]['home_score'].to_string(index = False).split('\n')) + map(float, prior[(prior['home_team'] == countryB) & (prior['away_team'] == countryA)]['away_score'].to_string(index = False).split('\n'))).round(2)
-                xB = np.mean(map(float, prior[(prior['home_team'] == countryB) & (prior['away_team'] == countryA)]['home_score'].to_string(index = False).split('\n')) + map(float, prior[(prior['home_team'] == countryA) & (prior['away_team'] == countryB)]['away_score'].to_string(index = False).split('\n'))).round(2)
+                xA = np.mean(map(float, prior[(prior['home_team'] == clubA) & (prior['away_team'] == clubB)]['home_score'].to_string(index = False).split('\n')) + map(float, prior[(prior['home_team'] == clubB) & (prior['away_team'] == clubA)]['away_score'].to_string(index = False).split('\n'))).round(2)
+                xB = np.mean(map(float, prior[(prior['home_team'] == clubB) & (prior['away_team'] == clubA)]['home_score'].to_string(index = False).split('\n')) + map(float, prior[(prior['home_team'] == clubA) & (prior['away_team'] == clubB)]['away_score'].to_string(index = False).split('\n'))).round(2)
             except:
-                xA = int(stats[stats.index == countryB]['Tier'].get_values())
-                xB = int(stats[stats.index == countryA]['Tier'].get_values())
-            d.append({'CountryA': countryA, 'CountryB': countryB, 'meanScoreA': xA, 'meanScoreB': xB})
-    processed_data = pd.DataFrame(d).reindex_axis(['CountryA', 'meanScoreA', 'CountryB', 'meanScoreB'], axis = 1).set_index(['CountryA', 'CountryB'])
-    processed_data.to_csv('data/WC18_prior.csv')
+                xA = int(stats[stats.index == clubB]['Tier'].get_values())
+                xB = int(stats[stats.index == clubA]['Tier'].get_values())
+            d.append({'ClubA': clubA, 'ClubB': clubB, 'meanScoreA': xA, 'meanScoreB': xB})
+    processed_data = pd.DataFrame(d).reindex_axis(['ClubA', 'meanScoreA', 'ClubB', 'meanScoreB'], axis = 1).set_index(['ClubA', 'ClubB'])
+    processed_data.to_csv('data/epl_prior.tsv',sep='\t')
+    return processed_data
 
+def get_competition_stats(epl_clubs, prdata, pdata):
+    teams = []
+    seen = []
+    for clubA in epl_clubs:
+        for clubB in epl_clubs:
+            if (clubA == clubB) | ((clubB, clubA) in seen): continue
+            seen.append((clubA, clubB))
+            attA = float(pdata[pdata['Club'] == clubA].Attack.get_values())
+            defA = float(pdata[pdata['Club'] == clubA].Defence.get_values())
+            midA = float(pdata[pdata['Club'] == clubA].Midfield.get_values())
+            ratA = float(pdata[pdata['Club'] == clubA].Rating.get_values())
+            tierA = float(pdata[pdata['Club'] == clubA].Tier.get_values())
+            attB = float(pdata[pdata['Club'] == clubB].Attack.get_values())
+            defB = float(pdata[pdata['Club'] == clubB].Defence.get_values())
+            midB = float(pdata[pdata['Club'] == clubB].Midfield.get_values())
+            ratB = float(pdata[pdata['Club'] == clubB].Rating.get_values())
+            tierB = float(pdata[pdata['Club'] == clubB].Tier.get_values())
+            winA = float(np.sign((prdata[(prdata['ClubA'] == clubA) & (prdata['ClubB'] == clubB)].meanScoreA - prdata[(prdata['ClubA'] == clubA) & (prdata['ClubB'] == clubB)].meanScoreB)))
+            teams.append({'attA': attA, 'defA': defA, 'midA': midA, 'ratA':ratA, 'tierA': tierA, 'attB': attB, 'defB': defB, 'midB': midB, 'ratB':ratB, 'tierB': tierB, 'winA': winA })
+    competition_stats = pd.DataFrame(teams)
+    return competition_stats

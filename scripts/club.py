@@ -56,6 +56,6 @@ class Club(object):
             if pos in midfield: midRating.append(float(rating))
             if pos in defense: defRating.append(float(rating))
             if pos in attack: attRating.append(float(rating))
-            #if self.name=='liverpool': print pos,rating
+            #if self.name=='watford': print pos,rating
         return np.mean(midRating).round(2), np.mean(defRating).round(2), np.mean(attRating).round(2)
 

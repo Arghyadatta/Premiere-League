@@ -7,16 +7,16 @@ Manchester United,"[u'De Gea' u'E. Bailly' u'V. Lindel\xf6f' u'L. Shaw' u'P. Pog
  u'Z. Ibrahimovi\u0107' u'H. Mkhitaryan']",3-5-2,1,88.64,90.0,90.33,86.17
 Liverpool,"[u'L. Karius' u'J. Matip' u'A. Oxlade-Chamberlain' u'N. Clyne' u'Coutinho'
  u'S. Man\xe9' u'Roberto Firmino' u'M. Salah' u'G. Wijnaldum' u'E. Can'
- u'M. Gruji\u0107']",3-5-2,1,85.64,86.8,,83.83
+ u'M. Gruji\u0107']",3-5-2,1,85.64,86.8,87.0,83.83
 Fulham,"[u'M. Bettinelli' u'Rafa Soares' u'T. Kalas' u'S. Sessegnon'
  u'R. Sessegnon' u'S. Ojo' u'T. Cairney' u'Rui Fonte' u'Lucas Piazon'
- u'I. Ciss\xe9' u'A. Kamara']",3-5-2,2,79.27,80.67,81.5,76.33
+ u'I. Ciss\xe9' u'A. Kamara']",3-5-2,2,79.27,80.67,80.33,76.33
 Southampton,"[u'F. Forster' u'V. van Dijk' u'W. Hoedt' u'C\xe9dric' u'J. Ward-Prowse'
  u'N. Redmond' u'S. Boufal' u'M. Gabbiadini' u'M. Lemina' u'Oriol Romeu'
- u'P. H\xf8jbjerg']",3-5-2,2,82.91,84.5,83.0,81.5
+ u'P. H\xf8jbjerg']",3-5-2,2,82.91,84.5,84.33,81.5
 Tottenham Hotspur,"[u'H. Lloris' u'D. S\xe1nchez' u'T. Alderweireld' u'J. Foyth'
  u'C. Eriksen' u'H. Kane' u'D. Alli' u'E. Dier' u'M. Edwards' u'H. Son'
- u'V. Wanyama']",3-5-2,1,87.64,88.5,89.33,86.5
+ u'V. Wanyama']",3-5-2,1,87.64,88.5,88.75,86.5
 Wolverhampton Wanderers,"[u'H. Burgoyne' u""A. N'Diaye"" u'K. Hause' u'R. Sa\xefss' u'R\xfaben Neves'
  u'Diogo Jota' u'H\xe9lder Costa' u'L\xe9o Bonatini' u'B. Enobakhare'
  u'Ivan Cavaleiro' u'C. Ronan']",3-5-2,2,80.45,82.33,84.5,77.33
@@ -30,7 +30,7 @@ Arsenal,"[u'P. \u010cech' u'H\xe9ctor Beller\xedn' u'S. Mustafi' u'R. Holding'
  u'L. Koscielny' u'A. S\xe1nchez' u'M. \xd6zil' u'A. Lacazette'
  u'G. Xhaka' u'A. Iwobi' u'J. Wilshere']",4-4-2,1,86.18,88.0,86.33,85.5
 Bournemouth,"[u'A. Begovi\u0107' u'N. Ak\xe9' u'S. Cook' u'T. Mings' u'L. Cook'
- u'J. King' u'J. Defoe' u'R. Fraser' u'J. Ibe' u'E. Hyndman' u'C. Wilson']",3-5-2,2,80.91,80.5,81.33,79.67
+ u'J. King' u'J. Defoe' u'R. Fraser' u'J. Ibe' u'E. Hyndman' u'C. Wilson']",3-5-2,2,80.91,80.5,81.25,79.67
 Brighton & Hove Albion,"[u'M. Ryan' u'L. Dunk' u'S. Duffy' u'C. Goldson' u'I. Brown'
  u'J. Izquierdo' u'D. Pr\xf6pper' u'S. March' u'A. Knockaert'
  u'P. Gro\xdf' u'J. Tilley']",3-5-2,2,79.09,80.0,80.0,77.33
@@ -48,7 +48,7 @@ Cardiff City,"[u'L. Camp' u'C. Paterson' u'S. Morrison' u'B. Ecu\xe9l\xe9 Manga'
  u'O. Bogle' u'C. Bryson']",3-5-2,3,73.27,78.0,73.25,72.17
 Burnley,"[u'T. Heaton' u'C. Taylor' u'B. Mee' u'R. Brady' u'M. Lowton'
  u'J. Hendrick' u'J. Cork' u'J. Tarkowski' u'C. Wood' u'S. Vokes'
- u'J. Walters']",4-4-2,2,78.45,78.33,79.0,78.33
+ u'J. Walters']",4-4-2,2,78.45,78.33,79.33,78.33
 Chelsea,"[u'T. Courtois' u'Azpilicueta' u'David Luiz' u'A. R\xfcdiger' u'E. Hazard'
  u'N. Kant\xe9' u'A. Christensen' u'Morata' u'T. Bakayoko' u'Diego Costa'
  u'Cesc F\xe0bregas']",3-5-2,1,88.09,89.5,89.0,86.33
@@ -57,4 +57,4 @@ Leicester City,"[u'K. Schmeichel' u'H. Maguire' u'B. Chilwell' u'A. Dragovi\u010
  u'Iborra' u'D. Amartey']",3-5-2,2,83.09,84.0,84.33,80.33
 Huddersfield Town,"[u'J. L\xf6ssl' u'F. Hadergjonaj' u'M. J\xf8rgensen' u'C. Schindler'
  u'T. Smith' u'S. Mouni\xe9' u'K. Palmer' u'P. Billing' u'A. Mooy'
- u'T. Ince' u'A. Sabiri']",4-4-2,2,78.36,79.75,81.0,76.83
+ u'T. Ince' u'A. Sabiri']",4-4-2,2,78.36,79.75,79.25,76.83
