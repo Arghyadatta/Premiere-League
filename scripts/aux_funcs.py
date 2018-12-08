@@ -50,4 +50,4 @@ def get_competition_stats(epl_clubs, prdata, pdata):
             winA = float(np.sign((prdata[(prdata['ClubA'] == clubA) & (prdata['ClubB'] == clubB)].meanScoreA - prdata[(prdata['ClubA'] == clubA) & (prdata['ClubB'] == clubB)].meanScoreB)))
             teams.append({'attA': attA, 'defA': defA, 'midA': midA, 'ratA':ratA, 'tierA': tierA, 'attB': attB, 'defB': defB, 'midB': midB, 'ratB':ratB, 'tierB': tierB, 'winA': winA })
     competition_stats = pd.DataFrame(teams)
-    return competition_stats
+    competition_stats.to_csv('data/epl_competition_stats.tsv',sep='\t')
