@@ -2,28 +2,35 @@ from common import *
 from sklearn.naive_bayes import GaussianNB
 
 
-matchdata = pd.read_csv('../data/epl_competition_stats.tsv',sep='\t')
-data = matchdata.iloc[:, :-1]
-targets = matchdata.iloc[:, -1]
+def get_probs():
+    # This function will generate a winning probability matrix
+    matchData = pd.read_csv('../data/epl_competition_stats.tsv',sep='\t')
+    data = matchData.iloc[:, :-1]
+    targets = matchData.iloc[:, -1]
 
-gnb = GaussianNB()
-model = gnb.fit(data, targets)
+    gnb = GaussianNB()
+    gnb.fit(data, targets)
 
-prob_matrix = np.zeros((20,20))
-#For each pair of teams, find predicted label, convert to probability.
+    clubData = pd.read_csv('../data/epl_processed.csv')
+    numClubs = len(clubData)
+    prob_matrix = np.zeros((numClubs, numClubs))
 
-teamdata = pd.read_csv('../data/epl_processed.csv')
-for i in range(0,20):
-    for j in range(i,20):
-        teamA = teamdata.iloc[i,:]
-        teamB = teamdata.iloc[j,:]
+    #For each pair of teams, find predicted label, convert to probability.
+    for i in range(numClubs):
+        for j in range(i,numClubs):
+            clubA = clubData.iloc[i, :]
+            clubB = clubData.iloc[j, :]
 
-        point = [teamA.Attack, teamB.Attack, teamA.Defence, teamB.Defence, teamA.Midfield, teamB.Midfield, teamA.Rating, teamB.Rating, teamA.Tier, teamB.Tier]
-        df = pd.DataFrame(np.array(point).reshape((1,10)), columns=data.columns)
-        winner = gnb.predict(df)
-        probs = gnb.predict_proba(df)
+            point = [clubA.Attack, clubB.Attack, clubA.Defence, clubB.Defence, clubA.Midfield, clubB.Midfield, clubA.Rating, clubB.Rating, clubA.Tier, clubB.Tier]
+            df = pd.DataFrame(np.array(point).reshape((1,10)), columns=data.columns)
+            # winner = gnb.predict(df)
+            probs = gnb.predict_proba(df)
 
-        prob_matrix[i,j] = .5 * probs[0,1] + probs[0,2]
-        prob_matrix[(j,i)] = .5 * probs[0,1] + probs[0,0]
+            prob_matrix[i,j] = .5 * probs[0,1] + probs[0,2]
+            prob_matrix[j,i] = .5 * probs[0,1] + probs[0,0]
 
-print(prob_matrix)
+    return prob_matrix
+
+
+# if __name__ == '__main__':
+#     print(get_probs())
