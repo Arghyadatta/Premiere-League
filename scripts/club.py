@@ -41,7 +41,6 @@ class Club(object):
         best_rating = 0
         best_squad, best_formation = [], []
         for i, formation in enumerate(squad_list):
-            print formation
             potRating, pot_squad, squad_info = self.get_best_squad_n(formation,'Potential')
             if potRating > best_rating:
                 best_rating = potRating
