@@ -1,5 +1,14 @@
 from common import *
 
+"""
+Create an object for class Club like:
+data = pd.read_csv('data/fifa_dataset_processed.tsv',sep='\t')
+chelsea = Club('chelsea',data)
+You can access player data by using chelsea.data
+
+"""
+
+
 
 class Club(object):
     def __init__(self,name,data):
@@ -50,32 +59,3 @@ class Club(object):
             if pos in attack: attRating.append(float(rating))
         return np.mean(midRating).round(2), np.mean(defRating).round(2), np.mean(attRating).round(2)
 
-"""
-def generate_team_stats():
-    d = []
-    for club in qualified_clubs:best_rating, best_squad, best_formation, squad_stats =get_best_formation_all(squad_list_adj, club)
-        mid_rating, def_rating, att_rating = get_team_stats(squad_stats)
-        if best_rating > 84.0: tier = 1
-        elif best_rating > 77.0: tier = 2
-        else: tier = 3
-        d.append({'Country': country, 'Rating': best_rating, 'Squad': best_squad,'Defence': def_rating,'Midfield': mid_rating, 'Attack': att_rating, 'Formation':best_formation,'Tier': tier})
-     processed_data = pd.DataFrame(d).reindex_axis(['Country', 'Squad', 'Formation', 'Tier',   'Rating', 'Attack', 'Midfield', 'Defence'], axis = 1).set_index('Club')
-     processed_data.to_csv('data/')
-     return processed_data
-
- def generate_prior_data(stats):
-     d = []
-     for countryA in qualified_countries:
-         for countryB in qualified_countries:
-             if countryA == countryB: continue
-             try:
-                 xA = np.mean(map(float, prior[(prior['home_team'] == countryA) & (prior['away_team'] == countryB)]['home_score'].to_string(index = False).split('\n')) + map(float,           prior[(prior['home_team'] == countryB) & (prior['away_team'] == countryA)]['away_score'].to_string(index = False).split('\n'))).round(2)
-                 xB = np.mean(map(float, prior[(prior['home_team'] == countryB) & (prior['away_team'] == countryA)]['home_score'].to_string(index = False).split('\n')) + map(float,           prior[(prior['home_team'] == countryA) & (prior['away_team'] == countryB)]['away_score'].to_string(index = False).split('\n'))).round(2)
-             except:
-                 # use a uniform prior
-                 xA = int(stats[stats.index == countryB]['Tier'].get_values())
-                 xB = int(stats[stats.index == countryA]['Tier'].get_values())
-             d.append({'CountryA': countryA, 'CountryB': countryB, 'meanScoreA': xA, 'meanScoreB': xB})
-     processed_data = pd.DataFrame(d).reindex_axis(['CountryA', 'meanScoreA', 'CountryB', 'meanScoreB'], axis = 1).set_index(['CountryA', 'CountryB'])
-     processed_data.to_csv('data/WC18_prior.csv')
-"""
