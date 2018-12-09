@@ -4,14 +4,14 @@ from sklearn.naive_bayes import GaussianNB
 # This method is modified from a github repository: https://github.com/puchiha/fifa-wc-2018-bayesian
 def get_probs():
     # This function will generate a winning probability matrix
-    matchData = pd.read_csv('../data/epl_competition_stats.tsv',sep='\t')
+    matchData = pd.read_csv('data/epl_competition_stats.tsv',sep='\t')
     data = matchData.iloc[:, :-1]
     targets = matchData.iloc[:, -1]
 
     gnb = GaussianNB()
     gnb.fit(data, targets)
 
-    clubData = pd.read_csv('../data/epl_processed.csv')
+    clubData = pd.read_csv('data/epl_processed.csv')
     numClubs = len(clubData)
     prob_matrix = np.zeros((numClubs, numClubs))
 
