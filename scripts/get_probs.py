@@ -17,7 +17,7 @@ def get_probs():
 
     #For each pair of teams, find predicted label, convert to probability.
     for i in range(numClubs):
-        for j in range(i,numClubs):
+        for j in range(i+1,numClubs):
             clubA = clubData.iloc[i, :]
             clubB = clubData.iloc[j, :]
 
